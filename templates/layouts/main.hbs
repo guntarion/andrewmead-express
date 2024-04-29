@@ -22,6 +22,9 @@
 
 		{{!-- Custom CSS --}}
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/bs-datatable.css">
+
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Document Title
@@ -173,10 +176,20 @@
 
 		<!-- JavaScripts
 		============================================= -->
+		<script src="js/jquery.min.js"></script>
 		<script src="js/plugins.min.js"></script>
 		<script src="js/chatmessage.js"></script>
 		<script src="js/functions.bundle.js"></script>
+		<script src="js/bs-datatable.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+
+		
+		<script>
+			jQuery(document).ready(function() {
+				jQuery('#chatDataTable').dataTable();
+			});
+		</script>
+
 
 </body>
 </html>
