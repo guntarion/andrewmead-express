@@ -34,3 +34,41 @@ function displayChatMessages(chat) {
     chatMessages.innerHTML = messagesHtml;
 }
 
+document.getElementById('get-content').addEventListener('click', function() {
+    const chatMessages = document.getElementById('chat-messages');
+    const chatContent = document.getElementById('chat-content');
+    const lastSender = document.getElementById('last-sender');
+
+    // Get the text content and type of all .message elements within #chat-messages
+    const messages = Array.from(chatMessages.querySelectorAll('.message')).map(message => {
+        const content = message.querySelector('.bubble').textContent;
+        const type = message.classList.contains('me') ? 'CS' : 'Clients';
+        return { type, content };
+    });
+
+    // Join the messages into a single string with line breaks between each message
+    const messagesText = messages.map(message => `${message.type}: ${message.content}`).join('\n');
+
+    // Insert the messages into #chat-content
+    chatContent.textContent = messagesText;
+
+    // Insert the type of the last message into #last-sender
+    lastSender.textContent = messages[messages.length - 1].type;
+});
+
+document.getElementById('get-message').addEventListener('click', function() {
+    const chatContent = document.getElementById('chat-content').textContent;
+    const lastSender = document.getElementById('last-sender').textContent;
+
+    fetch('/api/message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ chatContent, lastSender }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("openai-output").value = data.message;
+        });
+});

@@ -64,7 +64,23 @@
 </div>
 
 <div class="form-group">
+   
+   <br>
+   <div class="col-12">
+      <button id="get-content" type="button" name="openai-submit" class="btn btn-secondary">Get Content</button>
+   </div>
+   
+   <div id="chat-content"></div>
+   <div id="last-sender"></div>
+
+   <br>
    <label>Content Recommendation:</label>
+
+   
+   <div class="col-12">
+      <button id="get-message" type="button" name="openai-submit" class="btn btn-secondary">Get Recommendation</button>
+   </div>
+   <br>
    <textarea name="openai-output" id="openai-output" class="form-control required" cols="30" rows="5">{{message}}</textarea>
 </div>
 

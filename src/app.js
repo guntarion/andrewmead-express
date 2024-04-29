@@ -5,6 +5,9 @@ const { engine } = require('express-handlebars');
 const app = express();
 const fs = require('fs');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 require("dotenv").config();
 const OpenAI = require("openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
@@ -41,6 +44,7 @@ app.set('views', viewsPath);
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath));
 
+
 app.get('', (req, res) => {
   res.render('index', {
     title: 'Home',
@@ -62,16 +66,9 @@ app.get('/chats', async (req, res) => {
         }
         const chats = JSON.parse(data);
 
-        // Add the OpenAI completion code here
-        const completion = await openai.chat.completions.create({
-            messages: [{ role: "system", content: "Tell me a simple funny joke about cats." }],
-            model: "gpt-3.5-turbo",
-        });
-
         res.render("chats", {
             title: "Chats",
             chats: chats,
-            message: completion.choices[0].message.content,
         });
     });
 });
@@ -92,6 +89,7 @@ app.get("/api/chats", (req, res) => {
     res.json(JSON.parse(data));
   });
 });
+
 app.get('/datachat', (req, res) => {
   res.render('datachat', {
     title: 'Data Chat',
@@ -110,6 +108,33 @@ app.get('/forms', (req, res) => {
   });
 });
 
+
+// app.get('/api/message', async (req, res) => {
+//     const completion = await openai.chat.completions.create({
+//         messages: [{ role: "system", content: "Tell me a simple funny joke about cats." }],
+//         model: "gpt-3.5-turbo",
+//     });
+
+//     res.json({ message: completion.choices[0].message.content });
+// });
+
+app.post("/api/message", async (req, res) => {
+    const { chatContent, lastSender } = req.body;
+
+    const completion = await openai.chat.completions.create({
+        messages: [
+            { 
+                role: "system", 
+                content: lastSender === "Clients" 
+                    ? "Anda adalah customer service yang ramah dari Vido Garment, perusahaan yang bergerak di pembuatan seragam. Tugas Anda adalah memberi respon atas pesan terakhir yang disampaikan Client. Perhatikan isi percakapan sebelum-sebelumnya, untuk memahami konteksnya." + chatContent 
+                    : "Anda adalah customer service yang ramah dari Vido Garment, perusahaan yang bergerak di pembuatan seragam. Tugas Anda adalah melanjutkan pesan yang sudah disampaikan Customer Service. Perhatikan isi percakapan sebelum-sebelumnya, untuk memahami konteksnya." + chatContent 
+            },
+        ],
+        model: "gpt-3.5-turbo",
+    });
+
+    res.json({ message: completion.choices[0].message.content });
+});
 
 app.get('*', (req, res) => {
   res.render('404', {
