@@ -33567,6 +33567,7 @@ body.dark {
 }
 /*# sourceMappingURL=style.css.map */
 
+/* https://github.com/gundogduyakici/ChatUIDesign */
 
 .chat {
   height: 100%;
@@ -33811,4 +33812,9 @@ body.dark {
 
 .chat .content .message-form ul li.image-btn a {
   background: #4caf50;
+}
+
+
+.chat .sidebar .contacts ul li a .contact .message {
+    font-size: 12px; /* Adjust this value as needed */
 }

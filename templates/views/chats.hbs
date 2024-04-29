@@ -1,157 +1,64 @@
-      <div class="chat">
-         <div class="sidebar">
-            <div class="search">
-               <input type="text" placeholder="Suche..">
-               <i class="fa fa-search"></i>
-            </div>
-            <div class="contacts">
-               <ul>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                  <li class="active">
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                        <div class="notification">3</div>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                 
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="">
-                        <img src="img/avatar.png" alt="Avatar">
-                        <div class="contact">
-                           <div class="name">Gündoğdu YAKICI</div>
-                           <div class="message">Wie geht es Ihnen?...</div>
-                        </div>
-                     </a>
-                  </li>
-               </ul>
+<div class="chat">
+   <div class="sidebar">
+      <div class="search">
+         <input type="text" placeholder="Cari person...">
+         <i class="fa fa-search"></i>
+      </div>
+      <div class="contacts">
+         <ul>
+            {{#each chats}}
+            <li id="{{this.id}}">
+               <!-- Using an onclick event to call loadMessages with the chat id -->
+               <a href="javascript:void(0);" onclick="loadMessages({{this.id}})">
+                  <img src="{{this.avatar}}" alt="Avatar">
+                  <div class="contact">
+                     <div class="name">{{this.name}}</div>
+                     <div class="message">{{truncate this.lastmessage 10}}</div>
+                  </div>
+               </a>
+            </li>
+            {{/each}}
+         </ul>
+      </div>
+   </div>
+   <div class="content">
+      <div class="message-header">
+         <div class="user-info">
+            <img src="img/avatar.png" id="chat-avatar">
+            <div class="user">
+               <div class="name" id="chat-name">Select a chat</div>
+               <div class="time" id="chat-last-online">-</div>
             </div>
          </div>
-         <div class="content">
-            <div class="message-header">
-               <div class="user-info">
-                  <img src="img/avatar.png">
-                  <div class="user">
-                     <div class="name">Gündoğdu YAKICI</div>
-                     <div class="time">War vor 10 Minuten online</div>
-                  </div>
-               </div>
-               <div class="actions">
-                  <ul>
-                     <li>
-                        <a href="#">
-                        <i class="fa fa-info-circle"></i>
-                        </a>
-                     </li>
-                     <li>
-                        <a href="#">
-                        <i class="fa fa-ellipsis-v"></i>
-                        </a>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <div class="message-content">
-               <div class="message me">
-                  <div class="bubble">
-                     Hallo, Was geht ab?
-                  </div>
-                  <div class="time">Vor 3 Minute</div>
-               </div>
-               <div class="message">
-                  <div class="bubble">
-                     Mir geht es gut, danke.
-                  </div>
-                  <div class="time">Jetzt</div>
-               </div>
-            </div>
-            <div class="message-form">
-               <ul>
-                  <li class="emoji-btn">
-                     <a href="">
-                     <i class="fa fa-laugh"></i>
-                     </a>
-                  </li>
-                  <li class="input">							
-                     <input type="text" placeholder="Mesaj..">
-                  </li>
-                  <li class="sound-btn">
-                     <a href="">
-                     <i class="fa fa-microphone"></i>
-                     </a>
-                  </li>
-                  <li class="image-btn">
-                     <a href="">
-                     <i class="fa fa-image"></i>
-                     </a>
-                  </li>
-               </ul>
-            </div>
+         <div class="actions">
+            <ul>
+               <li><a href="#"><i class="fa fa-info-circle"></i></a></li>
+               <li><a href="#"><i class="fa fa-ellipsis-v"></i></a></li>
+            </ul>
          </div>
       </div>
+      <div class="message-content" id="chat-messages"></div>
+      <div class="message-form">
+         <ul>
+            <li class="emoji-btn">
+               <a href="">
+               <i class="fa fa-laugh"></i>
+               </a>
+            </li>
+            <li class="input">							
+               <input type="text" placeholder="Ketikkan pesan..">
+            </li>
+            <li class="sound-btn">
+               <a href="">
+               <i class="fa fa-microphone"></i>
+               </a>
+            </li>
+            <li class="image-btn">
+               <a href="">
+               <i class="fa fa-image"></i>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
